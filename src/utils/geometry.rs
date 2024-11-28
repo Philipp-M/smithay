@@ -1174,14 +1174,14 @@ impl<N: Coordinate, Kind> Rectangle<N, Kind> {
         }
     }
 
-    /// Checks whether given [`Point`] is inside the rectangle
+    /// Checks whether given [`Point`] is inside the rectangle (inclusive)
     #[inline]
     pub fn contains<P: Into<Point<N, Kind>>>(self, point: P) -> bool {
         let p: Point<N, Kind> = point.into();
         (p.x >= self.loc.x)
-            && (p.x < self.loc.x.saturating_add(self.size.w))
+            && (p.x <= self.loc.x.saturating_add(self.size.w))
             && (p.y >= self.loc.y)
-            && (p.y < self.loc.y.saturating_add(self.size.h))
+            && (p.y <= self.loc.y.saturating_add(self.size.h))
     }
 
     /// Checks whether given [`Rectangle`] is inside the rectangle
